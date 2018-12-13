@@ -23,8 +23,9 @@ import * as tf from '@tensorflow/tfjs';
 import * as bodyPix from '@tensorflow-models/body-pix';
 
 let pathName = location.pathname;
-let path = pathName.split('/').splice(0,-1).join('/');
+// let path = pathName.split('/').splice(0,-1).join('/');
 // bodyPix.checkpoints['0.75'].url = `${location.origin}${path}/assets/model_75/`;
+console.log(location);
 bodyPix.checkpoints['0.25'].url = `${location.origin}${path}/assets/model_25/`;
 
 let net;
