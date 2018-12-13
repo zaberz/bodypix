@@ -4,10 +4,10 @@ import * as _ from 'lodash';
 import ModelWorker from 'worker-loader!./modelWorker';
 
 console.log(bodyPix);
-bodyPix.checkpoints['1'].url = '/assets/model_100/';
-bodyPix.checkpoints['0.75'].url = '/assets/model_75/';
-bodyPix.checkpoints['0.5'].url = '/assets/model_50/';
-bodyPix.checkpoints['0.25'].url = '/assets/model_25/';
+bodyPix.checkpoints['1'].url = `${location.origin}${location.pathname}/assets/model_100/`;
+bodyPix.checkpoints['0.75'].url = `${location.href}${location.pathname}/assets/model_75/`;
+bodyPix.checkpoints['0.5'].url = `${location.href}${location.pathname}/assets/model_50/`;
+bodyPix.checkpoints['0.25'].url = `${location.href}${location.pathname}/assets/model_25/`;
 
 export default class Render {
     constructor(video, canvas) {

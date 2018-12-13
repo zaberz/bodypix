@@ -22,9 +22,10 @@ import * as tfc from '@tensorflow/tfjs-core';
 import * as tf from '@tensorflow/tfjs';
 import * as bodyPix from '@tensorflow-models/body-pix';
 
-bodyPix.checkpoints['0.75'].url = '/assets/model_75/';
-bodyPix.checkpoints['0.25'].url = '/assets/model_25/';
-
+let pathName = location.pathname;
+let path = pathName.split('/').splice(0,-1).join('/');
+// bodyPix.checkpoints['0.75'].url = `${location.origin}${path}/assets/model_75/`;
+bodyPix.checkpoints['0.25'].url = `${location.origin}${path}/assets/model_25/`;
 
 let net;
 let videoElm;
@@ -34,8 +35,8 @@ let flipHorizontal = false,
     segmentationThreshold = 0.5;
 
 async function loadModel() {
-    // net = await bodyPix.load(0.25);
-    net = await bodyPix.load(0.75);
+    net = await bodyPix.load(0.25);
+    // net = await bodyPix.load(0.5);
     return net;
 }
 
