@@ -94,7 +94,7 @@ document.getElementById('btn-add').addEventListener('click', e => {
 // console.log('main ' + e);
 // };
 
-render.loadModel().then(e => {
+render.loadModel(0.25).then(e => {
     return renderCanvas();
 });
 
