@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width," initial-scale="1," maximum-scale="1">
+  <title>Title</title>
+</head>
+<body>
+
+<div class="">
+  <video src="./assets/video.mp4" id="video" controls="controls" muted autoplay style="width: 1px;height: 1px"></video>
+  <video src="" id="rtc-video" autoplay style="width: 1px;height: 1px"></video>
+  <canvas id="canvas" style="width: 100vw;"></canvas>
+  <div class="controls">
+
+    <button id="btn-video">普通视频</button>
+    <button id="btn-rtc">开启摄像头</button>
+    <div>web worker
+      <input type="radio" name="worker" value="1"><span>使用</span>
+      <input type="radio" name="worker" value="0" checked><span>不使用</span>
+    </div>
+    <div>
+      精确度：
+      <input type="radio" value="1.0" name="multiplier"><span>1.0</span>
+      <input type="radio" value="0.75" name="multiplier" checked><span>0.75</span>
+      <input type="radio" value="0.5" name="multiplier"><span>0.5</span>
+      <input type="radio" value="0.25" name="multiplier"><span>0.25</span>
+    </div>
+    <div>
+      置信阙值：
+      <input type="text" placeholder="(0~1)" value="0.5" id="segmetation-treshold">
+    </div>
+
+    <div>
+      <input type="text" placeholder="输入弹幕" id="danmu-input">
+      <button id="btn-add">添加弹幕</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
