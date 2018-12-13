@@ -38,8 +38,10 @@ document.getElementById('btn-rtc').addEventListener('click', async (e) => {
 
     const mobile = isMobile();
 
+    // const videoWidth = 480;
     const videoWidth = 640;
     const videoHeight = 480;
+    // const videoHeight = 640;
 
     const stream = await navigator.mediaDevices.getUserMedia({
         'audio': false,
@@ -98,7 +100,7 @@ render.loadModel(0.25).then(e => {
     return renderCanvas();
 });
 
-render.initWorker();
+// render.initWorker();
 
 async function renderCanvas() {
     stats.begin();
