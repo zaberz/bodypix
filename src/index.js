@@ -1,8 +1,8 @@
-import * as tf from '@tensorflow/tfjs';
+// import * as tf from '@tensorflow/tfjs';
 import Stats from 'stats.js';
 import Render from './render';
-
-window.tf = tf;
+let tf = window.tf
+// window.tf = tf;
 let stats = new Stats();
 stats.showPanel(1);
 document.body.appendChild(stats.dom);
@@ -14,9 +14,6 @@ const RTCElm = document.getElementById('rtc-video');
 
 const videoButton = document.getElementById('btn-video');
 const RTCButton = document.getElementById('btn-rtc');
-
-const render = new Render(videoElm, canvas);
-render.addDanmu('帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅');
 
 document.getElementById('btn-video').addEventListener('click', (e) => {
     videoElm.play();
@@ -95,10 +92,18 @@ document.getElementById('btn-add').addEventListener('click', e => {
 // modelWorker.onmessage = function (e) {
 // console.log('main ' + e);
 // };
-
-render.loadModel(0.25).then(e => {
-    return renderCanvas();
-});
+let render
+let hasInit = false
+videoElm.addEventListener('canplay', ()=> {
+    if (!hasInit) {
+        hasInit = true
+        render = new Render(videoElm, canvas);
+        render.addDanmu('帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅帅');
+        render.loadModel(0.25).then(e => {
+            return renderCanvas();
+        });
+    }
+})
 
 // render.initWorker();
 
@@ -106,7 +111,6 @@ async function renderCanvas() {
     stats.begin();
     await render.draw();
     // modelWorker.postMessage({type: 'addVideo', data: tf.fromPixels(videoElm)});
-
     stats.end();
     requestAnimationFrame(renderCanvas);
 }

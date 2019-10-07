@@ -8,7 +8,7 @@
 <body>
 
 <div class="">
-  <video src="./assets/video.mp4" id="video" controls="controls" muted autoplay style="width: 1px;height: 1px"></video>
+  <video src="./assets/video.mp4" id="video" controls="controls" loop muted autoplay style="width: 1px;height: 1px"></video>
   <video src="" id="rtc-video" autoplay style="width: 1px;height: 1px"></video>
   <canvas id="canvas" style="width: 100vw;max-width: 500px;"></canvas>
   <div class="controls">
@@ -37,5 +37,8 @@
     </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.5/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@0.0.1"></script>
+
 <script type="text/javascript" src="main.js"></script></body>
 </html>

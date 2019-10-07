@@ -1,14 +1,14 @@
-import * as bodyPix from '@tensorflow-models/body-pix';
+// import * as bodyPix from '@tensorflow-models/body-pix';
 import Danmu from './danmu';
 import * as _ from 'lodash';
 import ModelWorker from 'worker-loader!./modelWorker';
-
+let bodyPix = window.bodyPix
 console.log(bodyPix);
 bodyPix.checkpoints['1'].url = `${location.origin}${location.pathname}/assets/model_100/`;
 bodyPix.checkpoints['0.75'].url = `${location.origin}${location.pathname}/assets/model_75/`;
 bodyPix.checkpoints['0.5'].url = `${location.origin}${location.pathname}/assets/model_50/`;
 bodyPix.checkpoints['0.25'].url = `${location.origin}${location.pathname}/assets/model_25/`;
-
+let net = null
 export default class Render {
     constructor(video, canvas) {
         this.videoElm = video;
@@ -26,7 +26,7 @@ export default class Render {
     }
 
     async loadModel(multiplier = 0.75) {
-        this.net = await bodyPix.load(multiplier);
+        net = this.net = await bodyPix.load(multiplier);
         return this.net;
     }
 
@@ -44,20 +44,20 @@ export default class Render {
 
     async _getBodySegmentation() {
         let {videoElm, flipHorizontal, outputStride, segmentationThreshold} = this;
-        let bodySegmentation = await this.net.estimatePersonSegmentation(
+        let bodySegmentation = await net.estimatePersonSegmentation(
             videoElm, flipHorizontal, outputStride, segmentationThreshold,
         );
         return bodySegmentation;
     }
 
     async _getBodySegmentationAndSet() {
-        let bodySegmentation = await this._getBodySegmentation();
+        let bodySegmentation = await this._getBodySegmentation()
         this.danmu.setMask(bodySegmentation);
     }
 
     _drawWithGPU() {
-        let {ctx, videoWidth, videoHeight, videoElm, danmu} = this;
-        ctx.clearRect(0, 0, videoWidth, videoHeight);
+        let {ctx, width, height, videoElm, danmu} = this;
+        ctx.clearRect(0, 0, width, height);
 
         ctx.drawImage(videoElm, 0, 0);
 
@@ -123,14 +123,13 @@ export default class Render {
 
     setVideo(videoElm) {
         this.videoElm = videoElm;
-
         let canvas = this.canvas;
+        console.log(videoElm.width);
         canvas.width = videoElm.width;
         canvas.height = videoElm.height;
 
         this.width = videoElm.width;
         this.height = videoElm.height;
-
         this.danmu.updateSize(videoElm.width, videoElm.height);
     }
 
